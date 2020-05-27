@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг» [![Build status][travis-image]][travis-url]
 
 * Студент: [Мария Никитина](https://up.htmlacademy.ru/javascript/20/user/1316825).
-* Наставник: `Неизвестно`.
+* Наставник: [Иван Марченко](https://htmlacademy.ru/profile/id1101807).
 
 ---
 
