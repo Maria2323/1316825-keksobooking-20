@@ -10,6 +10,10 @@ var objects = [];
 
 var randomValue = [Math.round(Math.random() * 10)];
 
+var getRandomElement = function (characteristic) {
+  return characteristic[Math.round(Math.random() * (characteristic.length - 1))];
+};
+
 var createTitle = function () {
   return 'Предложение ' + randomValue;
 };
@@ -48,20 +52,20 @@ var createY = function () {
 var createObject = function () {
   return {
     author: {
-      avatar: avatars[i]
+      avatar: getRandomElement(avatars)
     },
     offer: {
       title: createTitle(),
       address: createAddress(),
       price: createPrice(),
-      type: types[i],
+      type: getRandomElement(types),
       rooms: createRooms(),
       guests: createGuests(),
-      checkin: checkinCheckout[i],
-      checkout: checkinCheckout[i],
-      features: features[i],
+      checkin: getRandomElement(checkinCheckout),
+      checkout: getRandomElement(checkinCheckout),
+      features: getRandomElement(features),
       description: createDescription(),
-      photos: photos[i]
+      photos: getRandomElement(photos)
     },
     location: {
       x: createX(),
