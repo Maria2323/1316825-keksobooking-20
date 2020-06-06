@@ -75,20 +75,24 @@ var createObject = function () {
     },
     location: {
       x: createXY(),
-      y: createXY(),
+      y: createXY()
     }
   };
 };
 
+for (var i = 0; i < 8; i++) {
+  objects.push(createObject());
+}
+
 var mapPinListElement = document.querySelector('.map__pins');
 var pinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
 
-var renderPin = function (object) {
+var renderPin = function () {
   var pinElement = pinTemplate.cloneNode(true);
 
-  pinElement.querySelector('.map__pin').style = 'left: ' + object.location.x + 35 + 'px; top: ' + object.location.y + 70 + 'px;';
-  pinElement.querySelector('img').picture.src = object.author.avatar;
-  pinElement.querySelector('img').picture.alt = object.offer.title;
+  pinElement.style = 'left: ' + objects[i].location.x + 35 + 'px; top: ' + objects[i].location.y + 70 + 'px;';
+  pinElement.content.querySelector('img').src = objects[i].author.avatar;
+  pinElement.content.querySelector('img').alt = objects[i].offer.title;
 
   return pinElement;
 };
@@ -96,12 +100,9 @@ var renderPin = function (object) {
 var addObjects = function (list) {
   var fragment = document.createDocumentFragment();
   for (var i = 0; i < objects.length; i++) {
-    fragment.appendChild(renderPin(objects[i]));
+    fragment.appendChild(renderPin());
   }
   list.appendChild(fragment);
 };
 
-for (var i = 0; i < 8; i++) {
-  objects.push(createObject());
-}
 addObjects(mapPinListElement);
