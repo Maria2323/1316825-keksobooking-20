@@ -16,7 +16,7 @@ var getRandomElement = function (characteristic) {
 var createArray = function () {
   var finalArray = [];
   for (var i = 0; i < 10; i++) {
-    var randomNumeral = Math.round(Math.random() * 10);
+    var randomNumeral = Math.round((Math.random() + 0.1) * 10);
     finalArray.push(randomNumeral);
   }
   return finalArray;
@@ -27,8 +27,8 @@ var createTitle = function () {
 };
 
 var createAddress = function () {
-  var x = 100 * createArray()[i];
-  var y = 50 * createArray()[i];
+  var x = 10 * createArray()[i];
+  var y = 5 * createArray()[i];
   return '{' + x + ', ' + y + '}';
 };
 
@@ -51,8 +51,8 @@ var createDescription = function () {
   return 'Описание ' + createArray()[i];
 };
 
-var createXY = function () {
-  return 100 * createArray()[i];
+var createXY = function (min, max) {
+  return Math.random() * (max - min) + min;
 };
 
 var createObject = function () {
@@ -74,8 +74,8 @@ var createObject = function () {
       photos: createCharacteristic(PHOTOS)
     },
     location: {
-      x: createXY(),
-      y: createXY()
+      x: createXY(25, 1200),
+      y: createXY(200, 700)
     }
   };
 };
@@ -87,20 +87,20 @@ for (var i = 0; i < 8; i++) {
 var mapPinListElement = document.querySelector('.map__pins');
 var pinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
 
-var renderPin = function () {
+var renderPin = function (object) {
   var pinElement = pinTemplate.cloneNode(true);
 
-  pinElement.style = 'left: ' + objects[i].location.x + 35 + 'px; top: ' + objects[i].location.y + 70 + 'px;';
-  pinElement.content.querySelector('img').src = objects[i].author.avatar;
-  pinElement.content.querySelector('img').alt = objects[i].offer.title;
+  pinElement.style = 'left: ' + (object.location.x - 25) + 'px; top: ' + (object.location.y - 70) + 'px;';
+  pinElement.querySelector('img').src = object.author.avatar;
+  pinElement.querySelector('img').alt = object.offer.title;
 
   return pinElement;
 };
 
 var addObjects = function (list) {
   var fragment = document.createDocumentFragment();
-  for (var i = 0; i < objects.length; i++) {
-    fragment.appendChild(renderPin());
+  for (var j = 0; j < objects.length; j++) {
+    fragment.appendChild(renderPin(objects[j]));
   }
   list.appendChild(fragment);
 };
