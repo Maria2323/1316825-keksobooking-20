@@ -98,10 +98,9 @@ var addObjects = function (list) {
 
 addObjects(mapPinListElement);
 
-
 var adTemplate = document.querySelector('#card').content;
 
-var renderAdCArd = function (obj) {
+var renderAdCard = function (obj) {
   var cardElement = adTemplate.cloneNode(true);
   for (var i = 0; i < obj.length; i++) {
     cardElement.querySelector('.popup__title').textContent = obj[i].offer.title;
@@ -154,12 +153,16 @@ var renderAdCArd = function (obj) {
       cardElement.querySelector('.popup__feature--conditioner').classList.remove('hidden');
     }
     cardElement.querySelector('.popup__description').textContent = obj[i].offer.description;
-
-    cardElement.querySelector('.popup__photos').src = obj[i].offer.photos;
-
+    var images = cardElement.querySelector('.popup__photos');
+    for (var j = 0; j < obj[i].offer.photos.length; j++) {
+      cardElement.querySelector('.popup__photo').src = obj[i].offer.photos[i];
+      var image = cardElement.querySelector('.popup__photo').cloneNode(true);
+      image.src = obj[i].offer.photos[j];
+      images.appendChild(image);
+    }
     cardElement.querySelector('.popup__avatar').src = obj[i].author.avatar;
   }
   return cardElement;
 };
 
-console.log(renderAdCArd(objects));
+console.log(renderAdCard(objects));
