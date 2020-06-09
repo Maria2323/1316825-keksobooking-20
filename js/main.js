@@ -13,27 +13,18 @@ var getRandomElement = function (characteristic) {
   return characteristic[Math.round(Math.random() * (characteristic.length - 1))];
 };
 
-var createArray = function () {
-  var finalArray = [];
-  for (var i = 0; i < 10; i++) {
-    var randomNumeral = Math.round((Math.random() + 0.1) * 10);
-    finalArray.push(randomNumeral);
-  }
-  return finalArray;
-};
-
 var createTitle = function () {
-  return 'Предложение ' + createArray()[i];
+  return 'Предложение ' + Math.round((Math.random() + 0.1) * 10);
 };
 
 var createAddress = function () {
-  var x = 10 * createArray()[i];
-  var y = 5 * createArray()[i];
+  var x = 10 * Math.round((Math.random() + 0.1) * 10);
+  var y = 5 * Math.round((Math.random() + 0.1) * 10);
   return '{' + x + ', ' + y + '}';
 };
 
 var createPrice = function () {
-  var price = 500 * createArray()[i];
+  var price = 500 * Math.round((Math.random() + 0.1) * 10);
   return price + 'руб./сутки';
 };
 
@@ -48,7 +39,7 @@ var createCharacteristic = function (array) {
 };
 
 var createDescription = function () {
-  return 'Описание ' + createArray()[i];
+  return 'Описание ' + Math.round((Math.random() + 0.1) * 10);
 };
 
 var createXY = function (min, max) {
@@ -65,8 +56,8 @@ var createObject = function () {
       address: createAddress(),
       price: createPrice(),
       type: getRandomElement(TYPES),
-      rooms: createArray()[i],
-      guests: createArray()[i],
+      rooms: Math.round((Math.random() + 0.1) * 10),
+      guests: Math.round((Math.random() + 0.1) * 10),
       checkin: getRandomElement(CHECKIN_CHECKOUT),
       checkout: getRandomElement(CHECKIN_CHECKOUT),
       features: createCharacteristic(FEATURES),
