@@ -25,7 +25,7 @@ var createAddress = function () {
 
 var createPrice = function () {
   var price = 500 * Math.round((Math.random() + 0.1) * 10);
-  return price + 'руб./сутки';
+  return price + '₽/ночь';
 };
 
 var createCharacteristic = function (array) {
@@ -97,3 +97,41 @@ var addObjects = function (list) {
 };
 
 addObjects(mapPinListElement);
+
+
+var adTemplate = document.querySelector('#card').content;
+
+var renderAdCArd = function (obj) {
+  for (var i = 0; i < obj.length; i++) {
+    adTemplate.querySelector('.popup__title').textContent = obj[i].offer.title;
+    adTemplate.querySelector('.popup__text--address').textContent = obj[i].offer.address;
+    adTemplate.querySelector('.popup__text--price').textContent = obj[i].offer.price;
+    if (obj[i].offer.type === 'flat') {
+      adTemplate.querySelector('.popup__type').textContent = 'Квартира';
+    } else if (obj[i].offer.type === 'bungalo') {
+      adTemplate.querySelector('.popup__type').textContent = 'Бунгало';
+    } else if (obj[i].offer.type === 'house') {
+      adTemplate.querySelector('.popup__type').textContent = 'Дом';
+    } else if (obj[i].offer.type === 'palace') {
+      adTemplate.querySelector('.popup__type').textContent = 'Дворец';
+    }
+    adTemplate.querySelector('.popup__text--capacity').textContent = obj[i].offer.rooms + ' комнаты для ' + obj[i].offer.guests + ' гостей';
+    adTemplate.querySelector('.popup__text--time').textContent = 'Заезд после ' + obj[i].offer.checkin + ', выезд до ' + obj[i].offer.checkout;
+
+    adTemplate.querySelector('.popup__feature--wifi').textContent = 'wifi';
+    adTemplate.querySelector('.popup__feature--dishwasher').textContent = 'dishwasher';
+    adTemplate.querySelector('.popup__feature--parking').textContent = 'parking';
+    adTemplate.querySelector('.popup__feature--washer').textContent = 'washer';
+    adTemplate.querySelector('.popup__feature--elevator').textContent = 'elevator';
+    adTemplate.querySelector('.popup__feature--conditioner').textContent = 'conditioner';
+
+    adTemplate.querySelector('.popup__description').textContent = obj[i].offer.description;
+
+    adTemplate.querySelector('.popup__photos').src = obj[i].offer.photos;
+
+    adTemplate.querySelector('.popup__avatar').src = obj[i].author.avatar;
+  }
+  return adTemplate;
+};
+
+console.log(renderAdCArd(objects));
