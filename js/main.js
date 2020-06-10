@@ -25,7 +25,7 @@ var createAddress = function () {
 
 var createPrice = function () {
   var price = 500 * Math.round((Math.random() + 0.1) * 10);
-  return price + 'руб./сутки';
+  return price + '₽/ночь';
 };
 
 var createCharacteristic = function (array) {
@@ -97,3 +97,71 @@ var addObjects = function (list) {
 };
 
 addObjects(mapPinListElement);
+
+var adTemplate = document.querySelector('#card').content;
+
+var renderAdCard = function (obj) {
+  adTemplate.querySelector('.popup__title').textContent = obj[0].offer.title;
+  adTemplate.querySelector('.popup__text--address').textContent = obj[0].offer.address;
+  adTemplate.querySelector('.popup__text--price').textContent = obj[0].offer.price;
+  if (obj[0].offer.type === 'flat') {
+    adTemplate.querySelector('.popup__type').textContent = 'Квартира';
+  } else if (obj[0].offer.type === 'bungalo') {
+    adTemplate.querySelector('.popup__type').textContent = 'Бунгало';
+  } else if (obj[0].offer.type === 'house') {
+    adTemplate.querySelector('.popup__type').textContent = 'Дом';
+  } else if (obj[0].offer.type === 'palace') {
+    adTemplate.querySelector('.popup__type').textContent = 'Дворец';
+  }
+  adTemplate.querySelector('.popup__text--capacity').textContent = obj[0].offer.rooms + ' комнаты для ' + obj[0].offer.guests + ' гостей';
+  adTemplate.querySelector('.popup__text--time').textContent = 'Заезд после ' + obj[0].offer.checkin + ', выезд до ' + obj[0].offer.checkout;
+  adTemplate.querySelector('.popup__feature--wifi').textContent = 'wifi';
+  adTemplate.querySelector('.popup__feature--dishwasher').textContent = 'dishwasher';
+  adTemplate.querySelector('.popup__feature--parking').textContent = 'parking';
+  adTemplate.querySelector('.popup__feature--washer').textContent = 'washer';
+  adTemplate.querySelector('.popup__feature--elevator').textContent = 'elevator';
+  adTemplate.querySelector('.popup__feature--conditioner').textContent = 'conditioner';
+  if (!obj[0].offer.features.includes('wifi')) {
+    adTemplate.querySelector('.popup__feature--wifi').classList.add('hidden');
+  } else {
+    adTemplate.querySelector('.popup__feature--wifi').classList.remove('hidden');
+  }
+  if (!obj[0].offer.features.includes('dishwasher')) {
+    adTemplate.querySelector('.popup__feature--dishwasher').classList.add('hidden');
+  } else {
+    adTemplate.querySelector('.popup__feature--dishwasher').classList.remove('hidden');
+  }
+  if (!obj[0].offer.features.includes('parking')) {
+    adTemplate.querySelector('.popup__feature--parking').classList.add('hidden');
+  } else {
+    adTemplate.querySelector('.popup__feature--parking').classList.remove('hidden');
+  }
+  if (!obj[0].offer.features.includes('washer')) {
+    adTemplate.querySelector('.popup__feature--washer').classList.add('hidden');
+  } else {
+    adTemplate.querySelector('.popup__feature--washer').classList.remove('hidden');
+  }
+  if (!obj[0].offer.features.includes('elevator')) {
+    adTemplate.querySelector('.popup__feature--elevator').classList.add('hidden');
+  } else {
+    adTemplate.querySelector('.popup__feature--elevator').classList.remove('hidden');
+  }
+  if (!obj[0].offer.features.includes('conditioner')) {
+    adTemplate.querySelector('.popup__feature--conditioner').classList.add('hidden');
+  } else {
+    adTemplate.querySelector('.popup__feature--conditioner').classList.remove('hidden');
+  }
+  adTemplate.querySelector('.popup__description').textContent = obj[0].offer.description;
+  var images = adTemplate.querySelector('.popup__photos');
+  adTemplate.querySelector('.popup__photo').classList.add('hidden');
+  for (var j = 0; j < obj[0].offer.photos.length; j++) {
+    var image = adTemplate.querySelector('.popup__photo').cloneNode(true);
+    images.appendChild(image);
+    image.src = obj[0].offer.photos[j];
+  }
+  adTemplate.querySelector('.popup__avatar').src = obj[0].author.avatar;
+  return adTemplate;
+};
+
+var mapFiltersContainer = document.querySelector('.map__filters-container');
+map.insertBefore(renderAdCard(objects), mapFiltersContainer);
