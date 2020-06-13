@@ -81,6 +81,7 @@ selectRoomNumber.addEventListener('change', function () {
     selectGuestsNumber[3].disabled = true;
   }
   if (selectRoomNumber[3].selected === true) {
+    selectGuestsNumber[3].selected = true;
     selectGuestsNumber[0].disabled = true;
     selectGuestsNumber[1].disabled = true;
     selectGuestsNumber[2].disabled = true;
