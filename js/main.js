@@ -63,6 +63,10 @@ selectType.addEventListener('change', function () {
   }
 });
 
+selectGuestsNumber[0].disabled = true;
+selectGuestsNumber[1].disabled = true;
+selectGuestsNumber[3].disabled = true;
+
 selectRoomNumber.addEventListener('change', function () {
   if (selectRoomNumber[0].selected === true) {
     selectGuestsNumber[2].selected = true;
@@ -71,11 +75,13 @@ selectRoomNumber.addEventListener('change', function () {
     selectGuestsNumber[3].disabled = true;
   }
   if (selectRoomNumber[1].selected === true) {
+    selectGuestsNumber[2].selected = true;
     selectGuestsNumber[0].disabled = true;
     selectGuestsNumber[1].disabled = false;
     selectGuestsNumber[3].disabled = true;
   }
   if (selectRoomNumber[2].selected === true) {
+    selectGuestsNumber[2].selected = true;
     selectGuestsNumber[0].disabled = false;
     selectGuestsNumber[1].disabled = false;
     selectGuestsNumber[3].disabled = true;
