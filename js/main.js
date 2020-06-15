@@ -8,6 +8,8 @@ var PHOTOS = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.g
 var MAIN_PIN_WIDTH = 65;
 var MAIN_PIN_HEIGHT = 65;
 var objects = [];
+var mapPinListElement = document.querySelector('.map__pins');
+var pinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
 var map = document.querySelector('.map');
 var adForm = document.querySelector('.ad-form');
 var formFieldsets = adForm.querySelectorAll('fieldset');
@@ -20,19 +22,31 @@ var selectRoomNumber = adForm.querySelector('#room_number');
 var selectGuestsNumber = adForm.querySelector('#capacity');
 var buttonSubmit = adForm.querySelector('.ad-form__submit');
 
+var activatePage = function () {
+  map.classList.remove('map--faded');
+  mapFilters.classList.remove('ad-form--disabled');
+  formFieldsets.disabled = false;
+  adForm.classList.remove('ad-form--disabled');
+  inputAddress.value = (570 + MAIN_PIN_WIDTH * 0.5) + ', ' + (375 + MAIN_PIN_HEIGHT + 5);
 
-formFieldsets.disabled = true;
-mapFilters.classList.add('ad-form--disabled"');
-inputAddress.value = (570 + MAIN_PIN_WIDTH * 0.5) + ',' + (375 + MAIN_PIN_HEIGHT * 0.5);
+  addObjects(mapPinListElement);
+};
+
+var deactivatePage = function () {
+  map.classList.add('map--faded');
+  adForm.classList.add('ad-form--disabled');
+  mapPinListElement.disabled = true;
+  mapFilters.classList.add('ad-form--disabled');
+  formFieldsets.disabled = true;
+  inputAddress.value = (570 + MAIN_PIN_WIDTH * 0.5) + ',' + (375 + MAIN_PIN_HEIGHT * 0.5);
+};
+
+deactivatePage();
 
 mapPinMain.addEventListener('mousedown', function (event) {
   if (event.button === 0) {
-    formFieldsets.disabled = false;
-    mapFilters.classList.remove('ad-form--disabled');
-    adForm.classList.remove('ad-form--disabled');
-    map.classList.remove('map--faded');
+    activatePage();
   }
-  inputAddress.value = (570 + MAIN_PIN_WIDTH * 0.5) + ', ' + (375 + MAIN_PIN_HEIGHT + 5);
 });
 
 mapPinMain.addEventListener('keydown', function (event) {
@@ -75,14 +89,15 @@ selectRoomNumber.addEventListener('change', function () {
     selectGuestsNumber[3].disabled = true;
   }
   if (selectRoomNumber[1].selected === true) {
-    selectGuestsNumber[2].selected = true;
+    selectGuestsNumber[1].selected = true;
     selectGuestsNumber[0].disabled = true;
-    selectGuestsNumber[1].disabled = false;
+    selectGuestsNumber[2].disabled = false;
     selectGuestsNumber[3].disabled = true;
   }
   if (selectRoomNumber[2].selected === true) {
-    selectGuestsNumber[2].selected = true;
+    selectGuestsNumber[0].selected = true;
     selectGuestsNumber[0].disabled = false;
+    selectGuestsNumber[2].disabled = false;
     selectGuestsNumber[1].disabled = false;
     selectGuestsNumber[3].disabled = true;
   }
@@ -161,9 +176,6 @@ for (var i = 0; i < 8; i++) {
   objects.push(createObject());
 }
 
-var mapPinListElement = document.querySelector('.map__pins');
-var pinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
-
 var renderPin = function (object) {
   var pinElement = pinTemplate.cloneNode(true);
 
@@ -181,8 +193,6 @@ var addObjects = function (list) {
   }
   list.appendChild(fragment);
 };
-
-addObjects(mapPinListElement);
 
 /*var adTemplate = document.querySelector('#card').content;
 
