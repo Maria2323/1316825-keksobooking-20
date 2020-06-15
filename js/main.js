@@ -51,10 +51,7 @@ mapPinMain.addEventListener('mousedown', function (event) {
 
 mapPinMain.addEventListener('keydown', function (event) {
   if (event.key === 'Enter') {
-    formFieldsets.disabled = false;
-    mapFilters.classList.remove('ad-form--disabled');
-    adForm.classList.remove('ad-form--disabled');
-    map.classList.remove('map--faded');
+    activatePage();
   }
 });
 
