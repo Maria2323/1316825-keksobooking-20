@@ -25,10 +25,11 @@ var buttonSubmit = adForm.querySelector('.ad-form__submit');
 var activatePage = function () {
   map.classList.remove('map--faded');
   mapFilters.classList.remove('ad-form--disabled');
-  formFieldsets.disabled = false;
   adForm.classList.remove('ad-form--disabled');
   inputAddress.value = (570 + MAIN_PIN_WIDTH * 0.5) + ', ' + (375 + MAIN_PIN_HEIGHT + 5);
-
+  for (var i = 0; i < formFieldsets.length; i++) {
+    formFieldsets[i].disabled = false;
+  }
   addObjects(mapPinListElement);
 };
 
@@ -37,7 +38,9 @@ var deactivatePage = function () {
   adForm.classList.add('ad-form--disabled');
   mapPinListElement.disabled = true;
   mapFilters.classList.add('ad-form--disabled');
-  formFieldsets.disabled = true;
+  for (var i = 0; i < formFieldsets.length; i++) {
+    formFieldsets[i].disabled = true;
+  }
   inputAddress.value = (570 + MAIN_PIN_WIDTH * 0.5) + ',' + (375 + MAIN_PIN_HEIGHT * 0.5);
 };
 
