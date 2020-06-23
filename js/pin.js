@@ -14,10 +14,10 @@
       if (popup) {
         popup.remove();
       }
-      window.adCard(object);
+      window.renderAdCard(object);
     };
     pinElement.addEventListener('click', openPopup);
     return pinElement;
   };
-  window.pin = renderPin;
+  window.renderPin = renderPin;
 })();

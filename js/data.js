@@ -81,5 +81,5 @@
     }
     list.appendChild(fragment);
   };
-  window.objects = addObjects;
+  window.addObjects = addObjects;
 })();

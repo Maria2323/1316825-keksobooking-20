@@ -20,7 +20,7 @@
     for (var i = 0; i < formFieldsets.length; i++) {
       formFieldsets[i].disabled = false;
     }
-    window.objects(mapPinListElement);
+    window.addObjects(mapPinListElement);
   };
 
   var deactivatePage = function () {

@@ -12,7 +12,7 @@
     'palace': 'Дворец'
   };
 
-  var features = function (object, feature, element) {
+  var getFeatures = function (object, feature, element) {
     if (!object.offer.features.includes(feature)) {
       element.querySelector('.popup__feature--' + feature).classList.add('hidden');
     } else {
@@ -35,7 +35,7 @@
     adCard.querySelector('.popup__feature--elevator').textContent = 'elevator';
     adCard.querySelector('.popup__feature--conditioner').textContent = 'conditioner';
     for (var feat = 0; feat < FEATURES.length; feat++) {
-      features(obj, FEATURES[feat], adCard);
+      getFeatures(obj, FEATURES[feat], adCard);
     }
     adCard.querySelector('.popup__description').textContent = obj.offer.description;
     var images = adCard.querySelector('.popup__photos');
@@ -65,5 +65,5 @@
     return adCard;
   };
 
-  window.adCard = renderAdCard;
+  window.renderAdCard = renderAdCard;
 })();
