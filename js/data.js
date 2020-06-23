@@ -77,7 +77,7 @@
   var addObjects = function (list) {
     var fragment = document.createDocumentFragment();
     for (var j = 0; j < objects.length; j++) {
-      fragment.appendChild(window.pin(objects[j]));
+      fragment.appendChild(window.renderPin(objects[j]));
     }
     list.appendChild(fragment);
   };
