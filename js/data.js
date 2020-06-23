@@ -6,6 +6,12 @@
   var CHECKIN_CHECKOUT = ['12:00', '13:00', '14:00'];
   var FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
   var PHOTOS = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg', 'http://o0.github.io/assets/images/tokyo/hotel3.jpg'];
+  var map = document.querySelector('.map');
+  var CONST = 8;
+  var MAIN_PIN_WIDTH = 65;
+  var MAIN_PIN_HEIGHT = 65;
+  var PIN_WIDTH = 50;
+  var PIN_HEIGHT = 70;
 
   var getRandomElement = function (characteristic) {
     return characteristic[Math.round(Math.random() * (characteristic.length - 1))];
@@ -68,5 +74,14 @@
       }
     };
   };
-  window.createBookingData = createBookingData;
+  window.data = {
+    createBookingData: createBookingData,
+    FEATURES: FEATURES,
+    map: map,
+    CONST: CONST,
+    MAIN_PIN_WIDTH: MAIN_PIN_WIDTH,
+    MAIN_PIN_HEIGHT: MAIN_PIN_HEIGHT,
+    PIN_WIDTH: PIN_WIDTH,
+    PIN_HEIGHT: PIN_HEIGHT
+  };
 })();

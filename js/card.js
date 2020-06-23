@@ -1,8 +1,6 @@
 'use strict';
 
 (function () {
-  var map = document.querySelector('.map');
-  var FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
   var adTemplate = document.querySelector('#card').content;
 
   var type = {
@@ -34,8 +32,8 @@
     adCard.querySelector('.popup__feature--washer').textContent = 'washer';
     adCard.querySelector('.popup__feature--elevator').textContent = 'elevator';
     adCard.querySelector('.popup__feature--conditioner').textContent = 'conditioner';
-    for (var feat = 0; feat < FEATURES.length; feat++) {
-      getFeatures(obj, FEATURES[feat], adCard);
+    for (var feat = 0; feat < window.data.FEATURES.length; feat++) {
+      getFeatures(obj, window.data.FEATURES[feat], adCard);
     }
     adCard.querySelector('.popup__description').textContent = obj.offer.description;
     var images = adCard.querySelector('.popup__photos');
@@ -49,21 +47,23 @@
     var mapFiltersContainer = document.querySelector('.map__filters-container');
     var closeCardBtn = adCard.querySelector('.popup__close');
     var closeCard = function () {
-      var popup = map.querySelector('.popup');
+      var popup = window.data.map.querySelector('.popup');
       popup.remove();
-      closeCardBtn.removeEventListener('click', closeCard);
+      closeCardBtn.removeEventListener('click', closeCardEnter);
       closeCardBtn.removeEventListener('keydown', closeCardEsc);
+    };
+    var closeCardEnter = function () {
+      closeCard();
     };
     var closeCardEsc = function (evt) {
       if (evt.key === 'Escape') {
         closeCard();
       }
     };
-    closeCardBtn.addEventListener('click', closeCard);
+    closeCardBtn.addEventListener('click', closeCardEnter);
     document.addEventListener('keydown', closeCardEsc);
-    map.insertBefore(adCard, mapFiltersContainer);
+    window.data.map.insertBefore(adCard, mapFiltersContainer);
     return adCard;
   };
-
   window.renderAdCard = renderAdCard;
 })();
