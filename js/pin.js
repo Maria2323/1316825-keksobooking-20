@@ -3,6 +3,7 @@
 (function () {
   var pinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
   var map = document.querySelector('.map');
+  var objects = [];
   var renderPin = function (object) {
     var pinElement = pinTemplate.cloneNode(true);
 
@@ -19,5 +20,16 @@
     pinElement.addEventListener('click', openPopup);
     return pinElement;
   };
+  for (var i = 0; i < 8; i++) {
+    objects.push(window.createBookingData());
+  }
+  var addObjects = function (list) {
+    var fragment = document.createDocumentFragment();
+    for (var j = 0; j < objects.length; j++) {
+      fragment.appendChild(renderPin(objects[j]));
+    }
+    list.appendChild(fragment);
+  };
   window.renderPin = renderPin;
+  window.addObjects = addObjects;
 })();

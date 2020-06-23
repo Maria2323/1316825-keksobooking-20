@@ -6,7 +6,6 @@
   var CHECKIN_CHECKOUT = ['12:00', '13:00', '14:00'];
   var FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
   var PHOTOS = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg', 'http://o0.github.io/assets/images/tokyo/hotel3.jpg'];
-  var objects = [];
 
   var getRandomElement = function (characteristic) {
     return characteristic[Math.round(Math.random() * (characteristic.length - 1))];
@@ -45,7 +44,7 @@
     return Math.random() * (max - min) + min;
   };
 
-  var createObject = function () {
+  var createBookingData = function () {
     return {
       author: {
         avatar: getRandomElement(AVATARS)
@@ -69,17 +68,5 @@
       }
     };
   };
-
-  for (var i = 0; i < 8; i++) {
-    objects.push(createObject());
-  }
-
-  var addObjects = function (list) {
-    var fragment = document.createDocumentFragment();
-    for (var j = 0; j < objects.length; j++) {
-      fragment.appendChild(window.renderPin(objects[j]));
-    }
-    list.appendChild(fragment);
-  };
-  window.addObjects = addObjects;
+  window.createBookingData = createBookingData;
 })();
