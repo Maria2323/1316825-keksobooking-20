@@ -9,24 +9,31 @@
   var timeInSelect = adForm.querySelector('#timein');
   var timeOutSelect = adForm.querySelector('#timeout');
 
-  selectType.addEventListener('change', function () {
-    if (selectType.value === 'bungalo') {
-      inputPrice.min = 0;
-      inputPrice.placeholder = 0;
+  var getMinPrice = function (type) {
+    var minPrice = 0;
+    switch (type) {
+      case 'bungalo':
+        minPrice = 0;
+        break;
+      case 'flat':
+        minPrice = 1000;
+        break;
+      case 'house':
+        minPrice = 5000;
+        break;
+      case 'palace':
+        minPrice = 10000;
+        break;
     }
-    if (selectType.value === 'flat') {
-      inputPrice.min = 1000;
-      inputPrice.placeholder = 1000;
-    }
-    if (selectType.value === 'house') {
-      inputPrice.min = 5000;
-      inputPrice.placeholder = 5000;
-    }
-    if (selectType.value === 'palace') {
-      inputPrice.min = 10000;
-      inputPrice.placeholder = 10000;
-    }
-  });
+    return minPrice;
+  };
+
+  var changeMinPriceValue = function () {
+    inputPrice.min = getMinPrice(selectType.value);
+    inputPrice.placeholder = getMinPrice(selectType.value);
+  };
+
+  selectType.addEventListener('change', changeMinPriceValue);
 
   selectGuestsNumber[0].disabled = true;
   selectGuestsNumber[1].disabled = true;

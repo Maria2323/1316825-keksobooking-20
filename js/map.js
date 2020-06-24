@@ -17,7 +17,7 @@
     for (var i = 0; i < formFieldsets.length; i++) {
       formFieldsets[i].disabled = false;
     }
-    window.addObjects(mapPinListElement);
+    window.addRentalAds(mapPinListElement);
   };
 
   var deactivatePage = function () {
