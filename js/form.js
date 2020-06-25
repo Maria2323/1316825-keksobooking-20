@@ -8,6 +8,7 @@
   var selectGuestsNumber = adForm.querySelector('#capacity');
   var timeInSelect = adForm.querySelector('#timein');
   var timeOutSelect = adForm.querySelector('#timeout');
+  var address = adForm.querySelector('#address');
 
   var getMinPrice = function (type) {
     var minPrice = 0;
@@ -89,4 +90,5 @@
       timeOutSelect[1].disabled = true;
     }
   });
+
 })();
