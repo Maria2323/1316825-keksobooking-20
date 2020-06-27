@@ -89,5 +89,4 @@
       timeOutSelect[1].disabled = true;
     }
   });
-
 })();
