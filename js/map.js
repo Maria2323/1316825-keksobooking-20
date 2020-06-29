@@ -110,7 +110,7 @@
           y: moveEvt.clientY
         };
       }
-      inputAddress.value = (PinCoord.x + (window.data.MAIN_PIN_WIDTH / 2)) + ',' + (PinCoord.y + window.data.MAIN_PIN_ACTIVE_HEIGHT);
+      inputAddress.value = PinCoord.x + ',' + PinCoord.y;
     };
 
     var onMouseUp = function (upEvt) {
