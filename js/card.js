@@ -2,6 +2,7 @@
 
 (function () {
   var adTemplate = document.querySelector('#card').content;
+  var map = document.querySelector('.map');
 
   var type = {
     'flat': 'Квартира',
@@ -47,7 +48,7 @@
     var mapFiltersContainer = document.querySelector('.map__filters-container');
     var closeCardBtn = adCard.querySelector('.popup__close');
     var closeCard = function () {
-      var popup = window.data.map.querySelector('.popup');
+      var popup = map.querySelector('.popup');
       popup.remove();
       closeCardBtn.removeEventListener('click', closeCardEnter);
       closeCardBtn.removeEventListener('keydown', closeCardEsc);
@@ -62,7 +63,7 @@
     };
     closeCardBtn.addEventListener('click', closeCardEnter);
     document.addEventListener('keydown', closeCardEsc);
-    window.data.map.insertBefore(adCard, mapFiltersContainer);
+    map.insertBefore(adCard, mapFiltersContainer);
     return adCard;
   };
   window.renderAdCard = renderAdCard;
