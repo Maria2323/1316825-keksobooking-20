@@ -83,21 +83,34 @@
         x: startCoords.x - moveEvt.clientX,
         y: startCoords.y - moveEvt.clientY
       };
-      startCoords = {
-        x: moveEvt.clientX,
-        y: moveEvt.clientY
-      };
+
       var PinCoord = {
         x: (mapPinMain.offsetLeft - shift.x) + (window.data.MAIN_PIN_WIDTH / 2),
         y: (mapPinMain.offsetTop - shift.y) + window.data.MAIN_PIN_ACTIVE_HEIGHT
       };
-      if (PinCoord.y > 130 && PinCoord.y < 630) {
+
+      var isCursorOutside = function () {
+        return PinCoord.y < window.data.MAP_AREA.yMin ||
+        PinCoord.y > window.data.MAP_AREA.yMax ||
+        PinCoord.x < 0 ||
+        PinCoord.x > 1200;
+      };
+      if (isCursorOutside()) {
+        mapPinMain.style.top = mapPinMain.offsetTop + 'px';
+        mapPinMain.style.left = mapPinMain.offsetLeft + 'px';
+        startCoords = {
+          x: moveEvt.clientX - shift.x,
+          y: moveEvt.clientY - shift.y
+        };
+      } else {
         mapPinMain.style.top = (mapPinMain.offsetTop - shift.y) + 'px';
-      }
-      if (PinCoord.x > 0 && PinCoord.x < 1200) {
         mapPinMain.style.left = (mapPinMain.offsetLeft - shift.x) + 'px';
+        startCoords = {
+          x: moveEvt.clientX,
+          y: moveEvt.clientY
+        };
       }
-      inputAddress.value = PinCoord.x + ', ' + PinCoord.y;
+      inputAddress.value = (PinCoord.x + (window.data.MAIN_PIN_WIDTH / 2)) + ',' + (PinCoord.y + window.data.MAIN_PIN_ACTIVE_HEIGHT);
     };
 
     var onMouseUp = function (upEvt) {
