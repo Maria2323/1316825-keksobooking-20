@@ -23,13 +23,7 @@
   for (var i = 0; i < window.data.CONST; i++) {
     objects.push(window.data.createBookingData());
   }
-  var addRentalAds = function (list) {
-    var fragment = document.createDocumentFragment();
-    for (var j = 0; j < objects.length; j++) {
-      fragment.appendChild(renderPin(objects[j]));
-    }
-    list.appendChild(fragment);
-  };
+
   window.renderPin = renderPin;
-  window.addRentalAds = addRentalAds;
+  window.objects = objects;
 })();
