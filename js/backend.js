@@ -1,7 +1,7 @@
 'use strict';
 
 (function () {
-  window.load = function (onSuccess, onError) {
+  window.load = function (data, onSuccess, onError) {
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
     var statusCode = {
@@ -17,6 +17,6 @@
       }
     });
     xhr.open('GET', URL);
-    xhr.send();
+    xhr.send(data);
   };
 })();

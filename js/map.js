@@ -39,13 +39,7 @@
     for (var i = 0; i < formFieldsets.length; i++) {
       formFieldsets[i].disabled = false;
     }
-    window.load(function () {
-      var fragment = document.createDocumentFragment();
-      for (var j = 0; j < window.objects.length; j++) {
-        fragment.appendChild(window.renderPin(window.objects[j]));
-      }
-      mapPinListElement.appendChild(fragment);
-    }, function () {});
+    window.addRentalAds(mapPinListElement);
     displayDataAddress();
   };
 
