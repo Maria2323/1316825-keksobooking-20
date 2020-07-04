@@ -39,7 +39,7 @@
     for (var i = 0; i < formFieldsets.length; i++) {
       formFieldsets[i].disabled = false;
     }
-    window.addRentalAds(mapPinListElement);
+    window.load(window.addRentalAds, function () {});
     displayDataAddress();
   };
 
