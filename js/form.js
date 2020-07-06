@@ -8,6 +8,7 @@
   var selectGuestsNumber = adForm.querySelector('#capacity');
   var timeInSelect = adForm.querySelector('#timein');
   var timeOutSelect = adForm.querySelector('#timeout');
+  var resetFormButton = adForm.querySelector('.ad-form__reset');
 
   var getMinPrice = function (type) {
     var minPrice = 0;
@@ -88,5 +89,37 @@
       timeOutSelect[2].disabled = false;
       timeOutSelect[1].disabled = true;
     }
+  });
+
+  var successMessage = document.querySelector('#success').content;
+  var errorMessage = document.querySelector('#error').content;
+  var messageSuccess = adForm.querySelector('.success');
+  var messageError = adForm.querySelector('.error');
+  var removeMessage = function (messageStatus) {
+    messageStatus.remove();
+  };
+
+  var createMessage = function (statusMessage, messageStatus) {
+    adForm.appendChild(statusMessage);
+    document.addEventListener('keydown', function (evt) {
+      if (evt.key === 'Escape') {
+        removeMessage(messageStatus);
+      }
+    });
+  };
+
+  var onSubmit = function (evt) {
+    window.post(new FormData(adForm), function () {
+      createMessage(successMessage, messageSuccess);
+      adForm.reset();
+      window.deactivatePage();
+    }, function () {
+      createMessage(errorMessage, messageError);
+    });
+    evt.preventDefault();
+  };
+  adForm.addEventListener('submit', onSubmit);
+  resetFormButton.addEventListener('click', function () {
+    adForm.reset();
   });
 })();
