@@ -4,6 +4,7 @@
   var pinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
   var map = document.querySelector('.map');
   var mapPinListElement = document.querySelector('.map__pins');
+  var CONST_PINS = 5;
   var renderPin = function (object) {
     var pinElement = pinTemplate.cloneNode(true);
 
@@ -23,7 +24,7 @@
 
   var addRentalAds = function (objects) {
     var fragment = document.createDocumentFragment();
-    for (var j = 0; j < objects.length; j++) {
+    for (var j = 0; j < CONST_PINS; j++) {
       fragment.appendChild(renderPin(objects[j]));
     }
     mapPinListElement.appendChild(fragment);
