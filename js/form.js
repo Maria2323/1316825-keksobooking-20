@@ -8,6 +8,7 @@
   var selectGuestsNumber = adForm.querySelector('#capacity');
   var timeInSelect = adForm.querySelector('#timein');
   var timeOutSelect = adForm.querySelector('#timeout');
+  var resetFormButton = adForm.querySelector('.ad-form__reset');
 
   var getMinPrice = function (type) {
     var minPrice = 0;
@@ -88,5 +89,48 @@
       timeOutSelect[2].disabled = false;
       timeOutSelect[1].disabled = true;
     }
+  });
+
+  var successMessage = {
+    template: '#success',
+    element: '.success'
+  };
+  var errorMessage = {
+    template: '#error',
+    element: '.error'
+  };
+
+  var createMessage = function (statusMessage) {
+    var popup = document.querySelector(statusMessage.template).content.cloneNode(true);
+    adForm.appendChild(popup);
+    var onEscPress = function (evt) {
+      if (evt.key === 'Escape') {
+        document.querySelector(statusMessage.element).remove();
+      }
+      document.removeEventListener('keydown', onEscPress);
+      document.removeEventListener('click', onClick);
+    };
+    var onClick = function () {
+      document.querySelector(statusMessage.element).remove();
+      document.removeEventListener('click', onClick);
+      document.removeEventListener('keydown', onEscPress);
+    };
+    document.addEventListener('keydown', onEscPress);
+    document.addEventListener('click', onClick);
+  };
+
+  var onSubmit = function (evt) {
+    window.post(new FormData(adForm), function () {
+      createMessage(successMessage);
+      adForm.reset();
+      window.deactivatePage();
+    }, function () {
+      createMessage(errorMessage);
+    });
+    evt.preventDefault();
+  };
+  adForm.addEventListener('submit', onSubmit);
+  resetFormButton.addEventListener('click', function () {
+    adForm.reset();
   });
 })();
