@@ -91,35 +91,47 @@
     }
   });
 
-  var successMessage = document.querySelector('#success').content;
-  var errorMessage = document.querySelector('#error').content;
-  var messageSuccess = adForm.querySelector('.success');
-  var messageError = adForm.querySelector('.error');
-  var removeMessage = function (messageStatus) {
-    messageStatus.remove();
+  var successMessage = {
+    template: '#success',
+    element: '.success'
+  };
+  var errorMessage = {
+    template: '#error',
+    element: '.error'
   };
 
-  var createMessage = function (statusMessage, messageStatus) {
-    adForm.appendChild(statusMessage);
-    document.addEventListener('keydown', function (evt) {
+  var createMessage = function (statusMessage) {
+    var popup = document.querySelector(statusMessage.template).content.cloneNode(true);
+    adForm.appendChild(popup);
+    console.log(document.querySelector(statusMessage.element));
+    var onEscPress = function (evt) {
       if (evt.key === 'Escape') {
-        removeMessage(messageStatus);
+        document.querySelector(statusMessage.element).remove();
       }
-    });
+      document.removeEventListener('keydown', onEscPress);
+      document.removeEventListener('click', onClick);
+    };
+    var onClick = function () {
+      document.querySelector(statusMessage.element).remove();
+      document.removeEventListener('click', onClick);
+      document.removeEventListener('keydown', onEscPress);
+    };
+    document.addEventListener('keydown', onEscPress);
+    document.addEventListener('click', onClick);
   };
 
   var onSubmit = function (evt) {
     window.post(new FormData(adForm), function () {
-      createMessage(successMessage, messageSuccess);
+      createMessage(successMessage);
       adForm.reset();
       window.deactivatePage();
     }, function () {
-      createMessage(errorMessage, messageError);
+      createMessage(errorMessage);
     });
     evt.preventDefault();
   };
   adForm.addEventListener('submit', onSubmit);
-  resetFormButton.addEventListener('click', function () {
+  /*resetFormButton.addEventListener('click', function () {
     adForm.reset();
-  });
+  });*/
 })();
