@@ -131,7 +131,7 @@
     evt.preventDefault();
   };
   adForm.addEventListener('submit', onSubmit);
-  /*resetFormButton.addEventListener('click', function () {
+  resetFormButton.addEventListener('click', function () {
     adForm.reset();
-  });*/
+  });
 })();
