@@ -103,7 +103,6 @@
   var createMessage = function (statusMessage) {
     var popup = document.querySelector(statusMessage.template).content.cloneNode(true);
     adForm.appendChild(popup);
-    console.log(document.querySelector(statusMessage.element));
     var onEscPress = function (evt) {
       if (evt.key === 'Escape') {
         document.querySelector(statusMessage.element).remove();
