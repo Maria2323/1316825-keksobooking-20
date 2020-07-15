@@ -2,7 +2,6 @@
 
 (function () {
   var map = document.querySelector('.map');
-  var mapPins = map.querySelectorAll('.map__pin');
   var mapPinListElement = document.querySelector('.map__pins');
   var adForm = document.querySelector('.ad-form');
   var formFieldsets = adForm.querySelectorAll('fieldset');
