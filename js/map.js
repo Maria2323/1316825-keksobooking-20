@@ -57,13 +57,13 @@
     return rank;
   };
 
-  var updateRentals = function () {
+  var updateRentals = window.debounce(function () {
     removePins();
     removeCard();
     window.addRentalAds(rentals.sort(function (left, right) {
       return getRank(right) - getRank(left);
     }));
-  };
+  });
 
   mapFilters.addEventListener('change', updateRentals);
 
