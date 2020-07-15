@@ -2,12 +2,19 @@
 
 (function () {
   var map = document.querySelector('.map');
+  var mapPins = map.querySelectorAll('.map__pin');
   var mapPinListElement = document.querySelector('.map__pins');
   var adForm = document.querySelector('.ad-form');
   var formFieldsets = adForm.querySelectorAll('fieldset');
   var mapFilters = document.querySelector('.map__filters');
   var mapPinMain = document.querySelector('.map__pin--main');
   var inputAddress = adForm.querySelector('input[name = "address"]');
+  var rentals = [];
+  var filterTypeHousing = mapFilters.querySelector('#housing-type');
+  var filterPriceHousing = mapFilters.querySelector('#housing-price');
+  var filterRoomsHousing = mapFilters.querySelector('#housing-rooms');
+  var filterGuestsHousing = mapFilters.querySelector('#housing-guests');
+  var filterFeaturesHousing = mapFilters.querySelector('#housing-type');
 
   var getCoordMainPin = function () {
     var pinCoordinatesX;
@@ -32,6 +39,50 @@
     inputAddress.value = pinCoordinates.x + ',' + pinCoordinates.y;
   };
 
+  var getRank = function (rental) {
+    var rank = 0;
+
+    if (rental.offer.type === filterTypeHousing.value) {
+      rank += 1;
+    }
+    if (rental.offer.price === filterPriceHousing.value) {
+      rank += 1;
+    }
+    if (rental.offer.rooms === filterRoomsHousing.value) {
+      rank += 1;
+    }
+    if (rental.offer.guests === filterGuestsHousing.value) {
+      rank += 1;
+    }
+    if (rental.offer.features === filterFeaturesHousing.value) {
+      rank += 1;
+    }
+
+    return rank;
+  };
+
+  var removePins = function () {
+    var mapPinsItems = document.querySelectorAll('.map__pin:not(.map__pin--main)');
+    mapPinsItems.forEach(function (it) {
+      it.remove();
+    });
+  };
+  var removeCard = function () {
+    var popup = map.querySelector('.popup');
+    if (popup) {
+      popup.remove();
+    }
+  };
+  var updateRentals = function () {
+    removePins();
+    removeCard();
+    window.addRentalAds(rentals.slice(0).sort(function (left, right) {
+      return getRank(right) - getRank(left);
+    }));
+  };
+
+  mapFilters.addEventListener('change', updateRentals);
+
   var activatePage = function () {
     map.classList.remove('map--faded');
     mapFilters.classList.remove('ad-form--disabled');
@@ -39,7 +90,10 @@
     for (var i = 0; i < formFieldsets.length; i++) {
       formFieldsets[i].disabled = false;
     }
-    window.load(window.addRentalAds, function () {});
+    window.load(function (data) {
+      rentals = data;
+      updateRentals();
+    }, function () {});
     displayDataAddress();
   };
 
