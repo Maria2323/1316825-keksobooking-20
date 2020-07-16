@@ -8,6 +8,8 @@
   var mapFilters = document.querySelector('.map__filters');
   var mapPinMain = document.querySelector('.map__pin--main');
   var inputAddress = adForm.querySelector('input[name = "address"]');
+  var rentals = [];
+  var filterTypeHousing = mapFilters.querySelector('#housing-type');
 
   var getCoordMainPin = function () {
     var pinCoordinatesX;
@@ -32,6 +34,39 @@
     inputAddress.value = pinCoordinates.x + ',' + pinCoordinates.y;
   };
 
+  var removePins = function () {
+    var mapPinsItems = document.querySelectorAll('.map__pin:not(.map__pin--main)');
+    mapPinsItems.forEach(function (it) {
+      it.remove();
+    });
+  };
+  var removeCard = function () {
+    var popup = map.querySelector('.popup');
+    if (popup) {
+      popup.remove();
+    }
+  };
+
+  var getRank = function (rental) {
+    var rank = 0;
+
+    if (rental.offer.type === filterTypeHousing.value) {
+      rank += 2;
+    }
+
+    return rank;
+  };
+
+  var updateRentals = window.debounce(function () {
+    removePins();
+    removeCard();
+    window.addRentalAds(rentals.sort(function (left, right) {
+      return getRank(right) - getRank(left);
+    }));
+  });
+
+  mapFilters.addEventListener('change', updateRentals);
+
   var activatePage = function () {
     map.classList.remove('map--faded');
     mapFilters.classList.remove('ad-form--disabled');
@@ -39,7 +74,10 @@
     for (var i = 0; i < formFieldsets.length; i++) {
       formFieldsets[i].disabled = false;
     }
-    window.load(window.addRentalAds, function () {});
+    window.load(function (data) {
+      rentals = data;
+      updateRentals();
+    }, function () {});
     displayDataAddress();
   };
 
