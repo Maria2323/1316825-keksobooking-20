@@ -28,7 +28,7 @@
     }
     return minPrice;
   };
-
+  inputPrice.min = getMinPrice(selectType.value);
   var changeMinPriceValue = function () {
     inputPrice.min = getMinPrice(selectType.value);
     inputPrice.placeholder = getMinPrice(selectType.value);
