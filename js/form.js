@@ -1,6 +1,7 @@
 'use strict';
 
 (function () {
+  var mapPinMain = document.querySelector('.map__pin--main');
   var adForm = document.querySelector('.ad-form');
   var inputPrice = adForm.querySelector('#price');
   var selectType = adForm.querySelector('#type');
@@ -121,9 +122,12 @@
 
   var onSubmit = function (evt) {
     window.post(new FormData(adForm), function () {
+      window.removePins();
       createMessage(successMessage);
       adForm.reset();
       window.deactivatePage();
+      mapPinMain.style.left = 570 + 'px';
+      mapPinMain.style.top = 375 + 'px';
     }, function () {
       createMessage(errorMessage);
     });

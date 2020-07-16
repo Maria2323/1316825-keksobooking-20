@@ -162,4 +162,5 @@
     document.addEventListener('mouseup', onMouseUp);
   });
   window.deactivatePage = deactivatePage;
+  window.removePins = removePins;
 })();
