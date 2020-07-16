@@ -163,4 +163,5 @@
   });
   window.deactivatePage = deactivatePage;
   window.removePins = removePins;
+  window.removeCard = removeCard;
 })();

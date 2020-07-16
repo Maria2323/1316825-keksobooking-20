@@ -120,14 +120,19 @@
     document.addEventListener('click', onClick);
   };
 
+  var clearPage = function () {
+    adForm.reset();
+    window.deactivatePage();
+    window.removePins();
+    window.removeCard();
+    mapPinMain.style.left = 570 + 'px';
+    mapPinMain.style.top = 375 + 'px';
+  };
+
   var onSubmit = function (evt) {
     window.post(new FormData(adForm), function () {
-      window.removePins();
       createMessage(successMessage);
-      adForm.reset();
-      window.deactivatePage();
-      mapPinMain.style.left = 570 + 'px';
-      mapPinMain.style.top = 375 + 'px';
+      clearPage();
     }, function () {
       createMessage(errorMessage);
     });
@@ -135,6 +140,6 @@
   };
   adForm.addEventListener('submit', onSubmit);
   resetFormButton.addEventListener('click', function () {
-    adForm.reset();
+    clearPage();
   });
 })();
