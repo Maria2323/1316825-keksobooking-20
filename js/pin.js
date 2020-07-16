@@ -24,7 +24,8 @@
 
   var addRentalAds = function (objects) {
     var fragment = document.createDocumentFragment();
-    for (var j = 0; j < CONST_PINS; j++) {
+    var takeNumber = objects.length > CONST_PINS ? CONST_PINS : objects.length;
+    for (var j = 0; j < takeNumber; j++) {
       fragment.appendChild(renderPin(objects[j]));
     }
     mapPinListElement.appendChild(fragment);

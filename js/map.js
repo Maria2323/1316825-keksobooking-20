@@ -10,6 +10,29 @@
   var inputAddress = adForm.querySelector('input[name = "address"]');
   var rentals = [];
   var filterTypeHousing = mapFilters.querySelector('#housing-type');
+  var filterPriceHousing = mapFilters.querySelector('#housing-price');
+  var filterRoomsHousing = mapFilters.querySelector('#housing-rooms');
+  var filterGuestsHousing = mapFilters.querySelector('#housing-guests');
+  var filterFeaturesHousing = mapFilters.querySelector('#housing-features');
+
+  var priceScale = {
+    'any': {
+      min: 0,
+      max: Infinity
+    },
+    'middle': {
+      min: 10000,
+      max: 50000
+    },
+    'low': {
+      min: 0,
+      max: 10000
+    },
+    'high': {
+      min: 50000,
+      max: Infinity
+    }
+  };
 
   var getCoordMainPin = function () {
     var pinCoordinatesX;
@@ -47,22 +70,40 @@
     }
   };
 
-  var getRank = function (rental) {
-    var rank = 0;
-
-    if (rental.offer.type === filterTypeHousing.value) {
-      rank += 2;
-    }
-
-    return rank;
-  };
-
   var updateRentals = window.debounce(function () {
     removePins();
     removeCard();
-    window.addRentalAds(rentals.sort(function (left, right) {
-      return getRank(right) - getRank(left);
-    }));
+    var rentalsFiltering = rentals.filter(function (it) {
+      return it.offer;
+    });
+    var filtering = function (it, input, key) {
+      if (input.value === 'any') {
+        return it;
+      }
+      return it[key].toString() === input.value;
+    };
+    var sameTypeHousing = rentalsFiltering.filter(function (it) {
+      return filtering(it.offer, filterTypeHousing, 'type');
+    });
+    var samePriceHousing = function (it) {
+      var filteredPrice = priceScale[filterPriceHousing.value];
+      return ((it.offer.price >= filteredPrice.min) && (it.offer.price <= filteredPrice.max));
+    };
+    var sameRoomsHousing = function (it) {
+      return filtering(it.offer, filterRoomsHousing, 'rooms');
+    };
+    var sameGuestsHousing = function (it) {
+      return filtering(it.offer, filterGuestsHousing, 'guests');
+    };
+
+    var sameFeaturesHousing = function (it) {
+      var checkedFeatures = filterFeaturesHousing.querySelectorAll(':checked');
+      return Array.from(checkedFeatures).every(function (elm) {
+        return it.offer.features.includes(elm.value);
+      });
+    };
+    var filteredRentals = sameTypeHousing.filter(samePriceHousing).filter(sameRoomsHousing).filter(sameGuestsHousing).filter(sameFeaturesHousing);
+    window.addRentalAds(filteredRentals);
   });
 
   mapFilters.addEventListener('change', updateRentals);
@@ -76,7 +117,7 @@
     }
     window.load(function (data) {
       rentals = data;
-      updateRentals();
+      window.addRentalAds(rentals);
     }, function () {});
     displayDataAddress();
   };
