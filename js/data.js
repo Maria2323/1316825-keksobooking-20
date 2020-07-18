@@ -7,6 +7,7 @@
   var FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
   var PHOTOS = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg', 'http://o0.github.io/assets/images/tokyo/hotel3.jpg'];
   var CONST = 8;
+  var CONST_PINS = 5;
   var MAIN_PIN_WIDTH = 64;
   var MAIN_PIN_HEIGHT = 64;
   var MAIN_PIN_ACTIVE_HEIGHT = 80;
@@ -87,6 +88,7 @@
     MAIN_PIN_HEIGHT: MAIN_PIN_HEIGHT,
     PIN_WIDTH: PIN_WIDTH,
     PIN_HEIGHT: PIN_HEIGHT,
-    MAP_AREA: MAP_AREA
+    MAP_AREA: MAP_AREA,
+    CONST_PINS: CONST_PINS
   };
 })();
