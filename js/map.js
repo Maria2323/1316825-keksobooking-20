@@ -136,13 +136,13 @@
   deactivatePage();
 
   mapPinMain.addEventListener('mousedown', function (event) {
-    if (event.button === 0) {
+    if (event.button === 0 && map.classList.contains('map--faded')) {
       activatePage();
     }
   });
 
   mapPinMain.addEventListener('keydown', function (event) {
-    if (event.key === 'Enter') {
+    if (event.key === 'Enter' && map.classList.contains('map--faded')) {
       activatePage();
     }
   });
