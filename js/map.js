@@ -82,27 +82,27 @@
       }
       return it[key].toString() === input.value;
     };
-    var sameTypeHousing = rentalsFiltering.filter(function (it) {
+    var filteringByTypeHousing = rentalsFiltering.filter(function (it) {
       return filtering(it.offer, filterTypeHousing, 'type');
     });
-    var samePriceHousing = function (it) {
+    var filteringByPriceHousing = function (it) {
       var filteredPrice = priceScale[filterPriceHousing.value];
       return ((it.offer.price >= filteredPrice.min) && (it.offer.price <= filteredPrice.max));
     };
-    var sameRoomsHousing = function (it) {
+    var filteringByRoomsHousing = function (it) {
       return filtering(it.offer, filterRoomsHousing, 'rooms');
     };
-    var sameGuestsHousing = function (it) {
+    var filteringByGuestsHousing = function (it) {
       return filtering(it.offer, filterGuestsHousing, 'guests');
     };
 
-    var sameFeaturesHousing = function (it) {
+    var filteringByFeaturesHousing = function (it) {
       var checkedFeatures = filterFeaturesHousing.querySelectorAll(':checked');
       return Array.from(checkedFeatures).every(function (elm) {
         return it.offer.features.includes(elm.value);
       });
     };
-    var filteredRentals = sameTypeHousing.filter(samePriceHousing).filter(sameRoomsHousing).filter(sameGuestsHousing).filter(sameFeaturesHousing);
+    var filteredRentals = filteringByTypeHousing.filter(filteringByPriceHousing).filter(filteringByRoomsHousing).filter(filteringByGuestsHousing).filter(filteringByFeaturesHousing);
     window.addRentalAds(filteredRentals);
   });
 

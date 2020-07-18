@@ -3,7 +3,7 @@
 (function () {
   var AVATARS = ['img/avatars/user01.png', 'img/avatars/user02.png', 'img/avatars/user03.png', 'img/avatars/user04.png', 'img/avatars/user05.png', 'img/avatars/user06.png', 'img/avatars/user07.png', 'img/avatars/user08.png'];
   var TYPES = ['palace', 'flat', 'house', 'bungalo'];
-  var CHECKIN_CHECKOUT = ['12:00', '13:00', '14:00'];
+  var CHECKIN_CHECKOUTS = ['12:00', '13:00', '14:00'];
   var FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
   var PHOTOS = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg', 'http://o0.github.io/assets/images/tokyo/hotel3.jpg'];
   var CONST = 8;
@@ -66,8 +66,8 @@
         type: getRandomElement(TYPES),
         rooms: Math.round((Math.random() + 0.1) * 10),
         guests: Math.round((Math.random() + 0.1) * 10),
-        checkin: getRandomElement(CHECKIN_CHECKOUT),
-        checkout: getRandomElement(CHECKIN_CHECKOUT),
+        checkin: getRandomElement(CHECKIN_CHECKOUTS),
+        checkout: getRandomElement(CHECKIN_CHECKOUTS),
         features: createCharacteristic(FEATURES),
         description: createDescription(),
         photos: createCharacteristic(PHOTOS)
