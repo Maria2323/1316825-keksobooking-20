@@ -17,6 +17,8 @@
     yMin: 130,
     yMax: 630
   };
+  var MAIN_PIN_X = 570;
+  var MAIN_PIN_Y = 375;
 
   var getRandomElement = function (characteristic) {
     return characteristic[Math.round(Math.random() * (characteristic.length - 1))];
@@ -89,6 +91,8 @@
     PIN_WIDTH: PIN_WIDTH,
     PIN_HEIGHT: PIN_HEIGHT,
     MAP_AREA: MAP_AREA,
-    CONST_PINS: CONST_PINS
+    CONST_PINS: CONST_PINS,
+    MAIN_PIN_X: MAIN_PIN_X,
+    MAIN_PIN_Y: MAIN_PIN_Y
   };
 })();

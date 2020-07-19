@@ -38,13 +38,13 @@
     var pinCoordinatesX;
     var pinCoordinatesY;
     if (!map.classList.contains('map--faded')) {
-      pinCoordinatesX = (570 + (window.data.MAIN_PIN_WIDTH / 2));
-      pinCoordinatesY = (375 + window.data.MAIN_PIN_ACTIVE_HEIGHT);
-      inputAddress.value = (570 + (window.data.MAIN_PIN_WIDTH / 2)) + ',' + (375 + window.data.MAIN_PIN_ACTIVE_HEIGHT);
+      pinCoordinatesX = (window.data.MAIN_PIN_X + (window.data.MAIN_PIN_WIDTH / 2));
+      pinCoordinatesY = (window.data.MAIN_PIN_Y + window.data.MAIN_PIN_ACTIVE_HEIGHT);
+      inputAddress.value = (window.data.MAIN_PIN_X + (window.data.MAIN_PIN_WIDTH / 2)) + ',' + (window.data.MAIN_PIN_Y + window.data.MAIN_PIN_ACTIVE_HEIGHT);
     } else {
-      pinCoordinatesX = (570 + (window.data.MAIN_PIN_WIDTH / 2));
-      pinCoordinatesY = (375 + (window.data.MAIN_PIN_HEIGHT / 2));
-      inputAddress.value = (570 + (window.data.MAIN_PIN_WIDTH / 2)) + ',' + (375 + (window.data.MAIN_PIN_HEIGHT / 2));
+      pinCoordinatesX = (window.data.MAIN_PIN_X + (window.data.MAIN_PIN_WIDTH / 2));
+      pinCoordinatesY = (window.data.MAIN_PIN_Y + (window.data.MAIN_PIN_HEIGHT / 2));
+      inputAddress.value = (window.data.MAIN_PIN_X + (window.data.MAIN_PIN_WIDTH / 2)) + ',' + (window.data.MAIN_PIN_Y + (window.data.MAIN_PIN_HEIGHT / 2));
     }
     return {
       x: pinCoordinatesX,

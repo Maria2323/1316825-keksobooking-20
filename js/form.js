@@ -125,8 +125,8 @@
     window.deactivatePage();
     window.removePins();
     window.removeCard();
-    mapPinMain.style.left = 570 + 'px';
-    mapPinMain.style.top = 375 + 'px';
+    mapPinMain.style.left = window.data.MAIN_PIN_X + 'px';
+    mapPinMain.style.top = window.data.MAIN_PIN_Y + 'px';
   };
 
   var onSubmit = function (evt) {
