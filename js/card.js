@@ -43,6 +43,7 @@
       images.appendChild(image);
       image.src = obj.offer.photos[j];
     }
+    images.children[0].classList.add('hidden');
     adCard.querySelector('.popup__avatar').src = obj.author.avatar;
     var mapFiltersContainer = document.querySelector('.map__filters-container');
     var closeCardBtn = adCard.querySelector('.popup__close');
