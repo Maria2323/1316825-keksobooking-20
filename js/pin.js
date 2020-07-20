@@ -4,6 +4,7 @@
   var pinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
   var map = document.querySelector('.map');
   var mapPinListElement = document.querySelector('.map__pins');
+
   var renderPin = function (object) {
     var pinElement = pinTemplate.cloneNode(true);
 
@@ -17,7 +18,6 @@
         popup.remove();
       }
       window.renderAdCard(object);
-      console.log(1);
     };
     pinElement.addEventListener('click', openPopup);
     return pinElement;
