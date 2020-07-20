@@ -4,13 +4,14 @@
   var pinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
   var map = document.querySelector('.map');
   var mapPinListElement = document.querySelector('.map__pins');
-  var CONST_PINS = 5;
+
   var renderPin = function (object) {
     var pinElement = pinTemplate.cloneNode(true);
 
     pinElement.style = 'left: ' + (object.location.x - window.data.PIN_WIDTH / 2) + 'px; top: ' + (object.location.y - window.data.PIN_HEIGHT) + 'px;';
     pinElement.querySelector('img').src = object.author.avatar;
     pinElement.querySelector('img').alt = object.offer.title;
+
     var openPopup = function () {
       var popup = map.querySelector('.popup');
       if (popup) {
@@ -22,14 +23,14 @@
     return pinElement;
   };
 
-  var addRentalAds = function (objects) {
+  var addRentalAds = function (data) {
     var fragment = document.createDocumentFragment();
-    for (var j = 0; j < CONST_PINS; j++) {
-      fragment.appendChild(renderPin(objects[j]));
+    var takeNumber = data.length > window.data.CONST_PINS ? window.data.CONST_PINS : data.length;
+    for (var j = 0; j < takeNumber; j++) {
+      fragment.appendChild(renderPin(data[j]));
     }
     mapPinListElement.appendChild(fragment);
   };
 
-  window.renderPin = renderPin;
   window.addRentalAds = addRentalAds;
 })();

@@ -1,6 +1,7 @@
 'use strict';
 
 (function () {
+  var mapPinMain = document.querySelector('.map__pin--main');
   var adForm = document.querySelector('.ad-form');
   var inputPrice = adForm.querySelector('#price');
   var selectType = adForm.querySelector('#type');
@@ -119,11 +120,19 @@
     document.addEventListener('click', onClick);
   };
 
+  var clearPage = function () {
+    adForm.reset();
+    window.deactivatePage();
+    window.removePins();
+    window.removeCard();
+    mapPinMain.style.left = window.data.MAIN_PIN_X + 'px';
+    mapPinMain.style.top = window.data.MAIN_PIN_Y + 'px';
+  };
+
   var onSubmit = function (evt) {
     window.post(new FormData(adForm), function () {
       createMessage(successMessage);
-      adForm.reset();
-      window.deactivatePage();
+      clearPage();
     }, function () {
       createMessage(errorMessage);
     });
@@ -131,6 +140,6 @@
   };
   adForm.addEventListener('submit', onSubmit);
   resetFormButton.addEventListener('click', function () {
-    adForm.reset();
+    clearPage();
   });
 })();
