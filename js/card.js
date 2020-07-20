@@ -38,7 +38,6 @@
     }
     adCard.querySelector('.popup__description').textContent = obj.offer.description;
     var images = adCard.querySelector('.popup__photos');
-    adCard.querySelector('.popup__photo').classList.add('hidden');
     for (var j = 0; j < obj.offer.photos.length; j++) {
       var image = adCard.querySelector('.popup__photo').cloneNode(true);
       images.appendChild(image);
@@ -51,7 +50,7 @@
       var popup = map.querySelector('.popup');
       popup.remove();
       closeCardBtn.removeEventListener('click', closeCardEnter);
-      closeCardBtn.removeEventListener('keydown', closeCardEsc);
+      document.removeEventListener('keydown', closeCardEsc);
     };
     var closeCardEnter = function () {
       closeCard();
