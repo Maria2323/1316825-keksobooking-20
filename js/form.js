@@ -123,7 +123,8 @@
   var clearPage = function () {
     adForm.reset();
     window.deactivatePage();
-    window.preview.src = 'img/muffin-grey.svg';
+    window.previewAvatar.src = 'img/muffin-grey.svg';
+    window.previewHouse.src = 'img/muffin-grey.svg';
     window.removePins();
     window.removeCard();
     mapPinMain.style.left = window.data.MAIN_PIN_X + 'px';
