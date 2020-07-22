@@ -125,6 +125,7 @@
     window.deactivatePage();
     window.removePins();
     window.removeCard();
+    window.preview.src = ('img/muffin-grey.svg');
     mapPinMain.style.left = window.data.MAIN_PIN_X + 'px';
     mapPinMain.style.top = window.data.MAIN_PIN_Y + 'px';
   };
