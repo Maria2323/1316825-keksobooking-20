@@ -1,15 +1,14 @@
 'use strict';
 
 (function () {
-  var adTemplate = document.querySelector('#card').content;
-  var map = document.querySelector('.map');
-
   var type = {
     'flat': 'Квартира',
     'bungalo': 'Бунгало',
     'house': 'Дом',
     'palace': 'Дворец'
   };
+  var adTemplate = document.querySelector('#card').content;
+  var map = document.querySelector('.map');
 
   var getFeatures = function (object, feature, element) {
     if (!object.offer.features.includes(feature)) {
@@ -23,10 +22,10 @@
     var popup = map.querySelector('.popup');
     popup.remove();
   };
-  var closeCardEnter = function () {
+  var onEnterCloseCard = function () {
     closeCard();
   };
-  var closeCardEsc = function (evt) {
+  var onEscCloseCard = function (evt) {
     if (evt.key === 'Escape') {
       closeCard();
     }
@@ -38,8 +37,10 @@
     adCard.querySelector('.popup__text--address').textContent = obj.offer.address;
     adCard.querySelector('.popup__text--price').textContent = obj.offer.price;
     adCard.querySelector('.popup__type').textContent = type[obj.offer.type];
-    adCard.querySelector('.popup__text--capacity').textContent = obj.offer.rooms + ' комнаты для ' + obj.offer.guests + ' гостей';
-    adCard.querySelector('.popup__text--time').textContent = 'Заезд после ' + obj.offer.checkin + ', выезд до ' + obj.offer.checkout;
+    adCard.querySelector('.popup__text--capacity').textContent =
+      obj.offer.rooms + ' комнаты для ' + obj.offer.guests + ' гостей';
+    adCard.querySelector('.popup__text--time').textContent =
+      'Заезд после ' + obj.offer.checkin + ', выезд до ' + obj.offer.checkout;
     adCard.querySelector('.popup__feature--wifi').textContent = 'wifi';
     adCard.querySelector('.popup__feature--dishwasher').textContent = 'dishwasher';
     adCard.querySelector('.popup__feature--parking').textContent = 'parking';
@@ -60,8 +61,8 @@
     adCard.querySelector('.popup__avatar').src = obj.author.avatar;
     var mapFiltersContainer = document.querySelector('.map__filters-container');
     var closeCardBtn = adCard.querySelector('.popup__close');
-    closeCardBtn.addEventListener('click', closeCardEnter);
-    document.addEventListener('keydown', closeCardEsc);
+    closeCardBtn.addEventListener('click', onEnterCloseCard);
+    document.addEventListener('keydown', onEscCloseCard);
     map.insertBefore(adCard, mapFiltersContainer);
     return adCard;
   };

@@ -38,13 +38,21 @@
     var pinCoordinatesX;
     var pinCoordinatesY;
     if (!map.classList.contains('map--faded')) {
-      pinCoordinatesX = (window.data.MAIN_PIN_X + (window.data.MAIN_PIN_WIDTH / 2));
-      pinCoordinatesY = (window.data.MAIN_PIN_Y + window.data.MAIN_PIN_ACTIVE_HEIGHT);
-      inputAddress.value = (window.data.MAIN_PIN_X + (window.data.MAIN_PIN_WIDTH / 2)) + ',' + (window.data.MAIN_PIN_Y + window.data.MAIN_PIN_ACTIVE_HEIGHT);
+      pinCoordinatesX =
+        (window.data.MAIN_PIN_X + (window.data.MAIN_PIN_WIDTH / 2));
+      pinCoordinatesY =
+        (window.data.MAIN_PIN_Y + window.data.MAIN_PIN_ACTIVE_HEIGHT);
+      inputAddress.value =
+        (window.data.MAIN_PIN_X + (window.data.MAIN_PIN_WIDTH / 2)) + ','
+        + (window.data.MAIN_PIN_Y + window.data.MAIN_PIN_ACTIVE_HEIGHT);
     } else {
-      pinCoordinatesX = (window.data.MAIN_PIN_X + (window.data.MAIN_PIN_WIDTH / 2));
-      pinCoordinatesY = (window.data.MAIN_PIN_Y + (window.data.MAIN_PIN_HEIGHT / 2));
-      inputAddress.value = (window.data.MAIN_PIN_X + (window.data.MAIN_PIN_WIDTH / 2)) + ',' + (window.data.MAIN_PIN_Y + (window.data.MAIN_PIN_HEIGHT / 2));
+      pinCoordinatesX =
+        (window.data.MAIN_PIN_X + (window.data.MAIN_PIN_WIDTH / 2));
+      pinCoordinatesY =
+        (window.data.MAIN_PIN_Y + (window.data.MAIN_PIN_HEIGHT / 2));
+      inputAddress.value =
+        (window.data.MAIN_PIN_X + (window.data.MAIN_PIN_WIDTH / 2)) + ','
+        + (window.data.MAIN_PIN_Y + (window.data.MAIN_PIN_HEIGHT / 2));
     }
     return {
       x: pinCoordinatesX,
@@ -102,7 +110,11 @@
         return it.offer.features.includes(elm.value);
       });
     };
-    var filteredRentals = filteringByTypeHousing.filter(filteringByPriceHousing).filter(filteringByRoomsHousing).filter(filteringByGuestsHousing).filter(filteringByFeaturesHousing);
+    var filteredRentals = filteringByTypeHousing
+        .filter(filteringByPriceHousing)
+        .filter(filteringByRoomsHousing)
+        .filter(filteringByGuestsHousing)
+        .filter(filteringByFeaturesHousing);
     window.addRentalAds(filteredRentals);
   });
 
@@ -115,7 +127,7 @@
     for (var i = 0; i < formFieldsets.length; i++) {
       formFieldsets[i].disabled = false;
     }
-    window.load(function (data) {
+    window.backend.load(function (data) {
       rentals = data;
       window.addRentalAds(rentals);
     }, function () {});
@@ -171,8 +183,8 @@
       var isCursorOutside = function () {
         return PinCoord.y < window.data.MAP_AREA.yMin ||
         PinCoord.y > window.data.MAP_AREA.yMax ||
-        PinCoord.x < 0 ||
-        PinCoord.x > 1200;
+        PinCoord.x < window.data.MAP_AREA.xMin ||
+        PinCoord.x > window.data.MAP_AREA.xMax;
       };
       if (isCursorOutside()) {
         mapPinMain.style.top = mapPinMain.offsetTop + 'px';
@@ -202,7 +214,9 @@
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mouseup', onMouseUp);
   });
-  window.deactivatePage = deactivatePage;
-  window.removePins = removePins;
-  window.removeCard = removeCard;
+  window.map = {
+    deactivatePage: deactivatePage,
+    removePins: removePins,
+    removeCard: removeCard
+  };
 })();

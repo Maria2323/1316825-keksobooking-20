@@ -1,10 +1,10 @@
 'use strict';
 
 (function () {
+  var DEBOUNCE_INTERVAL = 500; // ms
   window.debounce = function (cb) {
 
     return function () {
-      var DEBOUNCE_INTERVAL = 500; // ms
       if (window.lastTimeout) {
         window.clearTimeout(window.lastTimeout);
       } else {

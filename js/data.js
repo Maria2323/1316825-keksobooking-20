@@ -1,11 +1,35 @@
 'use strict';
 
 (function () {
-  var AVATARS = ['img/avatars/user01.png', 'img/avatars/user02.png', 'img/avatars/user03.png', 'img/avatars/user04.png', 'img/avatars/user05.png', 'img/avatars/user06.png', 'img/avatars/user07.png', 'img/avatars/user08.png'];
-  var TYPES = ['palace', 'flat', 'house', 'bungalo'];
-  var CHECKIN_CHECKOUTS = ['12:00', '13:00', '14:00'];
-  var FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
-  var PHOTOS = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg', 'http://o0.github.io/assets/images/tokyo/hotel3.jpg'];
+  var AVATARS =
+    ['img/avatars/user01.png',
+      'img/avatars/user02.png',
+      'img/avatars/user03.png',
+      'img/avatars/user04.png',
+      'img/avatars/user05.png',
+      'img/avatars/user06.png',
+      'img/avatars/user07.png',
+      'img/avatars/user08.png'];
+  var TYPES =
+    ['palace',
+      'flat',
+      'house',
+      'bungalo'];
+  var CHECKIN_CHECKOUTS =
+    ['12:00',
+      '13:00',
+      '14:00'];
+  var FEATURES =
+    ['wifi',
+      'dishwasher',
+      'parking',
+      'washer',
+      'elevator',
+      'conditioner'];
+  var PHOTOS =
+    ['http://o0.github.io/assets/images/tokyo/hotel1.jpg',
+      'http://o0.github.io/assets/images/tokyo/hotel2.jpg',
+      'http://o0.github.io/assets/images/tokyo/hotel3.jpg'];
   var CONST = 8;
   var CONST_PINS = 5;
   var MAIN_PIN_WIDTH = 64;
@@ -15,7 +39,9 @@
   var PIN_HEIGHT = 70;
   var MAP_AREA = {
     yMin: 130,
-    yMax: 630
+    yMax: 630,
+    xMin: 0,
+    xMax: 1200
   };
   var MAIN_PIN_X = 570;
   var MAIN_PIN_Y = 375;

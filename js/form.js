@@ -30,12 +30,12 @@
     return minPrice;
   };
   inputPrice.min = getMinPrice(selectType.value);
-  var changeMinPriceValue = function () {
+  var onChangeMinPriceValue = function () {
     inputPrice.min = getMinPrice(selectType.value);
     inputPrice.placeholder = getMinPrice(selectType.value);
   };
 
-  selectType.addEventListener('change', changeMinPriceValue);
+  selectType.addEventListener('change', onChangeMinPriceValue);
 
   selectGuestsNumber[0].disabled = true;
   selectGuestsNumber[1].disabled = true;
@@ -122,9 +122,11 @@
 
   var clearPage = function () {
     adForm.reset();
-    window.deactivatePage();
-    window.removePins();
-    window.removeCard();
+    window.map.deactivatePage();
+    window.map.removePins();
+    window.map.removeCard();
+    window.avatar.previewAvatar.src = 'img/muffin-grey.svg';
+    window.avatar.previewHouse.src = 'img/muffin-grey.svg';
     mapPinMain.style.left = window.data.MAIN_PIN_X + 'px';
     mapPinMain.style.top = window.data.MAIN_PIN_Y + 'px';
   };
