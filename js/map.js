@@ -1,6 +1,11 @@
 'use strict';
 
 (function () {
+  var detailsHouse = {
+    type: 'type',
+    rooms: 'rooms',
+    guests: 'guests'
+  };
   var map = document.querySelector('.map');
   var mapPinListElement = document.querySelector('.map__pins');
   var adForm = document.querySelector('.ad-form');
@@ -91,17 +96,17 @@
       return it[key].toString() === input.value;
     };
     var filteringByTypeHousing = rentalsFiltering.filter(function (it) {
-      return filtering(it.offer, filterTypeHousing, 'type');
+      return filtering(it.offer, filterTypeHousing, detailsHouse.type);
     });
     var filteringByPriceHousing = function (it) {
       var filteredPrice = priceScale[filterPriceHousing.value];
       return ((it.offer.price >= filteredPrice.min) && (it.offer.price <= filteredPrice.max));
     };
     var filteringByRoomsHousing = function (it) {
-      return filtering(it.offer, filterRoomsHousing, 'rooms');
+      return filtering(it.offer, filterRoomsHousing, detailsHouse.rooms);
     };
     var filteringByGuestsHousing = function (it) {
-      return filtering(it.offer, filterGuestsHousing, 'guests');
+      return filtering(it.offer, filterGuestsHousing, detailsHouse.guests);
     };
 
     var filteringByFeaturesHousing = function (it) {
