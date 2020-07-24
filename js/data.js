@@ -109,6 +109,7 @@
   };
   window.data = {
     createBookingData: createBookingData,
+    CHECKIN_CHECKOUTS: CHECKIN_CHECKOUTS,
     MAIN_PIN_ACTIVE_HEIGHT: MAIN_PIN_ACTIVE_HEIGHT,
     FEATURES: FEATURES,
     CONST: CONST,

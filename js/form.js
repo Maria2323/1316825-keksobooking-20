@@ -1,6 +1,12 @@
 'use strict';
 
 (function () {
+  var roomNumbers = {
+    1: [1],
+    2: [1, 2],
+    3: [1, 2, 3],
+    100: [0]
+  };
   var mapPinMain = document.querySelector('.map__pin--main');
   var adForm = document.querySelector('.ad-form');
   var inputPrice = adForm.querySelector('#price');
@@ -37,59 +43,32 @@
 
   selectType.addEventListener('change', onChangeMinPriceValue);
 
-  selectGuestsNumber[0].disabled = true;
-  selectGuestsNumber[1].disabled = true;
-  selectGuestsNumber[3].disabled = true;
+  var getMatchingCapacityNumbers = function (value) {
+    var guestsNumbers = selectGuestsNumber.querySelectorAll('option');
+    guestsNumbers.forEach(function (it) {
+      it.disabled = true;
+    });
+    roomNumbers[value].forEach(function (it) {
+      selectGuestsNumber.querySelector('option' + '[value="' + it + '"]').disabled = false;
+      selectGuestsNumber.value = it;
+    });
+  };
 
   selectRoomNumber.addEventListener('change', function () {
-    if (selectRoomNumber[0].selected) {
-      selectGuestsNumber[2].selected = true;
-      selectGuestsNumber[0].disabled = true;
-      selectGuestsNumber[1].disabled = true;
-      selectGuestsNumber[3].disabled = true;
-    }
-    if (selectRoomNumber[1].selected) {
-      selectGuestsNumber[1].selected = true;
-      selectGuestsNumber[0].disabled = true;
-      selectGuestsNumber[2].disabled = false;
-      selectGuestsNumber[3].disabled = true;
-    }
-    if (selectRoomNumber[2].selected) {
-      selectGuestsNumber[0].selected = true;
-      selectGuestsNumber[0].disabled = false;
-      selectGuestsNumber[2].disabled = false;
-      selectGuestsNumber[1].disabled = false;
-      selectGuestsNumber[3].disabled = true;
-    }
-    if (selectRoomNumber[3].selected) {
-      selectGuestsNumber[3].selected = true;
-      selectGuestsNumber[0].disabled = true;
-      selectGuestsNumber[1].disabled = true;
-      selectGuestsNumber[2].disabled = true;
-      selectGuestsNumber[3].disabled = false;
-    }
+    getMatchingCapacityNumbers(selectRoomNumber.value);
   });
 
-  timeOutSelect[1].disabled = true;
-  timeOutSelect[2].disabled = true;
+  var getMatchingCheckoutTime = function () {
+    var checkoutTimes = timeOutSelect.querySelectorAll('option');
+    checkoutTimes.forEach(function (it) {
+      it.disabled = true;
+    });
+    timeOutSelect.querySelector('option' + '[value="' + timeInSelect.value + '"]').disabled = false;
+    timeOutSelect.value = timeInSelect.value;
+  };
 
   timeInSelect.addEventListener('change', function () {
-    if (timeInSelect[0].selected) {
-      timeOutSelect[0].selected = true;
-      timeOutSelect[1].disabled = true;
-      timeOutSelect[2].disabled = true;
-      timeOutSelect[0].disabled = false;
-    }
-    if (timeInSelect[1].selected) {
-      timeOutSelect[1].selected = true;
-      timeOutSelect[1].disabled = false;
-      timeOutSelect[0].disabled = true;
-    }
-    if (timeInSelect[2].selected) {
-      timeOutSelect[2].selected = true;
-      timeOutSelect[2].disabled = false;
-      timeOutSelect[1].disabled = true;
-    }
+    getMatchingCheckoutTime();
   });
 
   var successMessage = {
